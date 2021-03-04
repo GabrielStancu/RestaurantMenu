@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Recipe } from '../recipe.model';
 
 @Component({
@@ -13,10 +13,17 @@ export class RecipeListComponent implements OnInit {
       new Recipe('A Test Recipe 2', 'This is simply a test 2',
       'https://www.lauralaurentiu.ro/wp-content/uploads/2017/11/ciulama-de-pui-cu-ciuperci-si-smantana-reteta-video-cum-se-face-ciulama-de-pui-cu-ciuperci-pas-cu-pas-475x317.jpg')
   ];
+  @Output() recipeWasSelected = new EventEmitter<Recipe>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onRecipeSelected(recipeClicked: Recipe): void {
+    this.recipeWasSelected.emit(
+      recipeClicked
+    );
   }
 
 }
